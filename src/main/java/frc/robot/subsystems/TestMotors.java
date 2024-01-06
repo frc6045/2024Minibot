@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TestMotors extends SubsystemBase {
   /** Creates a new TestMotors. */
-  private CANSparkMax m_testMotor1 = new CANSparkMax(TestMotorConstants.kTestMotor1CANID, MotorType.kBrushless);
-  private CANSparkMax m_testMotor2 = new CANSparkMax(TestMotorConstants.kTestMotor1CANID, MotorType.kBrushless);
+  private CANSparkMax m_testMotor1;
+  private CANSparkMax m_testMotor2;
   public TestMotors() {
     m_testMotor1 = new CANSparkMax(TestMotorConstants.kTestMotor1CANID, MotorType.kBrushless);
-    m_testMotor2 = new CANSparkMax(TestMotorConstants.kTestMotor1CANID, MotorType.kBrushless);
+    m_testMotor2 = new CANSparkMax(TestMotorConstants.kTestMotor2CANID, MotorType.kBrushless);
   }
 
   @Override
