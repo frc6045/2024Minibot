@@ -363,10 +363,10 @@ public final class Constants {
   }
 
   public static final class TestMotorConstants {
-    public static final int kTestMotor1CANID = 10; //10
-    public static final int kTestMotor2CANID = 11; //11
-    public static final double kTestMotor1MaxSpeed = 0.75;
-    public static final double kTestMotor2MaxSpeed = .5;
+    public static final int kTestMotor1CANID = 11; //10
+    public static final int kTestMotor2CANID = 10; //11
+    public static final double kTestMotor1MaxSpeed = .85;
+    public static final double kTestMotor2MaxSpeed = 1.00;
   }
 
   

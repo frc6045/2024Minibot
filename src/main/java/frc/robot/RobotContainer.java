@@ -23,7 +23,7 @@ public class RobotContainer{
 private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
 private final XboxController m_driverController = new XboxController(0);
 private final TestMotors m_TestMotors = new TestMotors();
-private Autos m_autos = new Autos(m_driveSubsystem);  
+private Autos m_autos = new Autos(m_driveSubsystem, m_TestMotors);  
 private ShuffleboardTab teleopTab = Shuffleboard.getTab("teleOp");
 public RobotContainer() {
 
@@ -46,9 +46,17 @@ public RobotContainer() {
   private void configureBindings() {
     new JoystickButton(m_driverController, XboxController.Button.kStart.value).onTrue(new RunCommand(() -> { m_driveSubsystem.zeroHeading();}));
     
-    new Trigger(() -> {return (m_driverController.getRightTriggerAxis() > 0 || m_driverController.getLeftTriggerAxis() > 0);}).whileTrue(
-    new RunCommand(() -> {m_TestMotors.runMotors(() -> {return MathUtil.applyDeadband(m_driverController.getRightTriggerAxis(), 0, TestMotorConstants.kTestMotor1MaxSpeed);}, () -> {return MathUtil.applyDeadband(m_driverController.getLeftTriggerAxis(), 0, TestMotorConstants.kTestMotor2MaxSpeed);});},
-      m_TestMotors)).onFalse((new RunCommand(() -> {m_TestMotors.stop();}, m_TestMotors)));
+    // Both Trigger Control of Test Motors
+    // new Trigger(() -> {return (m_driverController.getRightTriggerAxis() > 0 || m_driverController.getLeftTriggerAxis() > 0);}).whileTrue(
+    // new RunCommand(() -> {m_TestMotors.runMotors(() -> {return MathUtil.applyDeadband(m_driverController.getRightTriggerAxis(), 0, TestMotorConstants.kTestMotor1MaxSpeed);},
+    //  () -> {return MathUtil.applyDeadband(m_driverController.getLeftTriggerAxis(), 0, TestMotorConstants.kTestMotor2MaxSpeed);});},
+    //   m_TestMotors)).onFalse((new RunCommand(() -> {m_TestMotors.stop();}, m_TestMotors)));
+
+    new Trigger(() -> {return (m_driverController.getLeftTriggerAxis() > 0);}).whileTrue(new RunCommand(() -> {
+      m_TestMotors.OneSupplierRunMotors(m_driverController::getLeftTriggerAxis);
+    }, m_TestMotors));
+
+    
   }
 
   public Command getAutonomousCommand() {
