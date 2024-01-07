@@ -4,11 +4,17 @@
 
 package frc.robot.subsystems;
 
+import org.photonvision.PhotonCamera;
+
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class OrangePi extends SubsystemBase {
-  /** Creates a new OrangePi. */
-  public OrangePi() {}
+public class Camera extends SubsystemBase {
+  /** Creates a new Camera. */
+  private final PhotonCamera m_Camera;
+  public Camera() {
+    m_Camera = new PhotonCamera("photonvision");
+  }
 
   @Override
   public void periodic() {

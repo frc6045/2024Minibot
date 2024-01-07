@@ -31,13 +31,14 @@ public class Autos {
         
         autoChooser.addOption("Characterization", "Characterization");
         autoChooser.addOption("Basic Test Auto", "Basic Test Auto");
+        autoChooser.addOption("3RingPath", "3RingPath");
         m_commandMap.put("Characterization", List.of(
             new FeedForwardCharacterization(m_drivetrainSubsystem, true, new FeedForwardCharacterizationData("DriveSubsystem"), 
             m_drivetrainSubsystem::runCharacterizationVolts, m_drivetrainSubsystem::getCharacterizationVelocity),
             new FeedForwardCharacterization(m_drivetrainSubsystem, true, new FeedForwardCharacterizationData("DriveSubsystem"), 
             m_drivetrainSubsystem::runCharacterizationVolts, m_drivetrainSubsystem::getCharacterizationVelocity)));
         m_commandMap.put("Basic Test Auto", List.of(AutoBuilder.buildAuto("Basic Test Auto")));
-
+        m_commandMap.put("3RingPath", List.of(AutoBuilder.buildAuto("3RingPath")));
         // SmartDashboard.putData(autoChooser);
         autoTab.add(autoChooser);
         

@@ -61,7 +61,7 @@ public final class Constants {
     // the robot, rather the allowed maximum speeds
     
     //Slew Constants
-    public static final double kMaxSpeedMetersPerSecond = 4.8;
+    public static final double kMaxSpeedMetersPerSecond = 4.8; //changed from 4.8 bc stuff wasnt straped down TODO: do that
     public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
     public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = //
@@ -365,7 +365,8 @@ public final class Constants {
   public static final class TestMotorConstants {
     public static final int kTestMotor1CANID = 10; //10
     public static final int kTestMotor2CANID = 11; //11
-
+    public static final double kTestMotor1MaxSpeed = 0.75;
+    public static final double kTestMotor2MaxSpeed = .5;
   }
 
   

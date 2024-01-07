@@ -8,6 +8,8 @@ import java.util.function.Supplier;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import Jama.test.TestMatrix;
 import frc.robot.Constants.TestMotorConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -26,8 +28,36 @@ public class TestMotors extends SubsystemBase {
   }
   
   public void runMotors(Supplier<Double> speed1, Supplier<Double> speed2){
-    m_testMotor1.set(speed1.get());
-    m_testMotor2.set(speed2.get());
+    if(speed1.get() <= TestMotorConstants.kTestMotor1MaxSpeed){
+      m_testMotor1.set(speed1.get());
+    } else {
+      m_testMotor1.set(TestMotorConstants.kTestMotor1MaxSpeed);
+    }
+    if(speed2.get() <= TestMotorConstants.kTestMotor2MaxSpeed){
+      m_testMotor2.set(speed2.get());
+    } else {
+      m_testMotor2.set(TestMotorConstants.kTestMotor2MaxSpeed);
+    }
+  }
+
+  public void nonDumbRunMotors(Supplier<Double> speed){
+   if(speed.get() <= TestMotorConstants.kTestMotor1MaxSpeed){
+      m_testMotor1.set(speed.get());
+    } else {
+      m_testMotor1.set(TestMotorConstants.kTestMotor1MaxSpeed);
+    }
+    if(speed.get() <= TestMotorConstants.kTestMotor2MaxSpeed){
+      m_testMotor2.set(speed.get());
+    } else {
+      m_testMotor2.set(TestMotorConstants.kTestMotor2MaxSpeed);
+    }
+
+  }
+
+  public void stop(){
+    m_testMotor1.set(0);
+    m_testMotor2.set(0);
+
   }
 
 

@@ -6,15 +6,21 @@ package frc.robot.subsystems.swerve;
 
 import java.util.function.DoubleSupplier;
 
+import org.photonvision.PhotonPoseEstimator;
+import org.photonvision.PhotonPoseEstimator.PoseStrategy;
+
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -126,6 +132,7 @@ private final AHRS m_gyro = new AHRS(SPI.Port.kMXP, (byte) 200);
             private boolean isCharacterizing = false;
             private double characterizationVolts = 0.0;
 
+        //private PhotonPoseEstimator m_visionPoseEstimator = new PhotonPoseEstimator(AprilTagFieldLayout.loadFromResource(AprilTagFields.k2023ChargedUp.m_resourceFile), PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, new Transform3d()); //TODO: actually make this work
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -178,20 +185,18 @@ private final AHRS m_gyro = new AHRS(SPI.Port.kMXP, (byte) 200);
       m_rearRight.runCharacterization(characterizationVolts, DriveConstants.kBackRightChassisAngularOffset);
     }
     logData();
-    // System.out.println(Timer.getFPGATimestamp());
-    // System.out.println(LimelightHelpers.getLatency_Pipeline("limelight"));
-
-  // if(LimelightHelpers.getBotPose3d_wpiBlue("limelight").toPose2d() != null)
-  //       m_poseEstimator.addVisionMeasurement(LimelightHelpers.getBotPose3d_wpiBlue("limelight").toPose2d(), Timer.getFPGATimestamp() - LimelightHelpers.getLatency_Pipeline("limelight"));
-  
-//System.out.println(LimelightHelpers.getBotPose3d_wpiBlue("limelight").toPose2d().getX());
+   
 
 
     //eventually figure out what each result value is
 
-   //TODO: addMyVisionMeasurment();
     updateOdometry();
     
+    //TODO: make thing work
+    // m_visionPoseEstimator.update().ifPresent(estimatedRobotPose -> {
+    //   m_poseEstimator.addVisionMeasurement(estimatedRobotPose.estimatedPose.toPose2d(), estimatedRobotPose.timestampSeconds);
+    // });
+ 
 
    
 
